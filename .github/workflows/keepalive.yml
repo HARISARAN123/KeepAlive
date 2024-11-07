@@ -1,0 +1,27 @@
+name: Keep Growmate App Alive
+
+# Run this workflow every 1 minute (GitHub Actions minimum interval)
+on:
+  schedule:
+    - cron: '*/1 * * * *'  # Runs every minute
+
+jobs:
+  keep_alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Use any compatible Python version
+
+      - name: Install dependencies
+        run: |
+          pip install requests  # Install required packages if any
+
+      - name: Run keepmealive.py script
+        run: |
+          python keepmealive.py
